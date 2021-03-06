@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+{% if latest_question_list %}
+
+<ul>
+	{% for question in latest_question_list  %}
+	<!-- this type of url pass the path of question || here we add polls for avoiding collisions to different app and their templates-->
+		<li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a></li>
+	{% endfor %}
+</ul>
+{% else %}
+	<p>No polls are available</p>
+{% endif %}
+
+</body>
+</html>
