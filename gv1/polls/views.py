@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import  get_object_or_404 ,render
 from django.http import HttpResponse , Http404 # http4040 is for raising exception
 from .models import Question
 # Create your views here.
@@ -12,13 +12,9 @@ def index(request):
 	return render(request,'polls/index.html',context)
 
 def detail(request,question_id):
-	# if question_id doesnot exist so it throw error
-	try:
-		question=Question.objects.get(pk=question_id)
-	except Question.DoesNotExist:
-		raise Http404("Question does not exist")
+	# this will automatically check if object is their for that key or not
+	question=get_object_or_404(Question,pk=question_id)
 	return render(request,'polls/detail.html',{'question':question})
-
 
 def results(request,question_id):
 	response="You are looking at the results of question %s."
